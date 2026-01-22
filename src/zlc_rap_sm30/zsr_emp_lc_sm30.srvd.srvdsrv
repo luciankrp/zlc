@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition for Employee'
+define service ZSR_EMP_LC_SM30 {
+  expose ZC_EMP_SINGLETON_LC;
+  expose ZC_EMPLOYEE_LC;
+}

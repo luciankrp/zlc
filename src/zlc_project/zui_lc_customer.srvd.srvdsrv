@@ -1,0 +1,6 @@
+@EndUserText.label: 'Customer Service Definition'
+define service ZUI_LC_CUSTOMER {
+  expose ZC_LC_CUSTOMER as Customer;
+  expose ZC_LC_PROJECT  as Project;
+  expose ZC_LC_TASK     as Task;
+}

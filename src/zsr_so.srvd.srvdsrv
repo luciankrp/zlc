@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service Definition for Sales Order'
+define service ZSR_SO {
+  expose ZC_SO;
+}

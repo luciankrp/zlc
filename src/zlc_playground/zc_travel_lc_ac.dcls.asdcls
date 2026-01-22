@@ -1,0 +1,11 @@
+@EndUserText.label: 'Access Control for Travel'
+@MappingRole: true
+define role ZC_TRAVEL_LC_AC {
+    grant
+        select
+            on
+                ZC_TRAVEL_LC
+                    where
+                        Description = 'Vacation';
+                        
+}

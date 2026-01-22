@@ -1,0 +1,92 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: {
+    typeName: 'Chapter',
+    typeNamePlural: 'Chapters',
+    typeImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Wikibooks-logo.svg/500px-Wikibooks-logo.svg.png',
+    title: {
+        type: #STANDARD,
+        label: 'Chapter',
+        value: 'ChapterId'
+    },
+    description: {
+        type: #STANDARD,
+        label: 'Chapter',
+        value: 'ChapterId'
+    }
+}
+@Search.searchable: true
+@UI.presentationVariant: [{ sortOrder: [{ by: 'Title', direction: #ASC }] }]
+annotate entity ZC_LC_CHAPTER with
+{
+  @UI.facet: [{
+      id: 'Header',
+      purpose: #HEADER,
+      position: 10,
+      importance: #HIGH,
+      label: 'Header',
+      type: #FIELDGROUP_REFERENCE,
+      targetQualifier: 'Header'
+  }, {
+      id: 'ChapterCollection',
+      purpose: #STANDARD,
+      position: 10,
+      label: 'Chapter',
+      type: #COLLECTION
+  }, {
+      id: 'Chapter',
+      purpose: #STANDARD,
+      position: 10,
+      label: 'Chapter',
+      type: #IDENTIFICATION_REFERENCE,
+      parentId: 'ChapterCollection'
+  }, {
+      id: 'Chapterid',
+      purpose: #STANDARD,
+      position: 20,
+      label: 'Book & Chapter ID',
+      type: #IDENTIFICATION_REFERENCE,
+      parentId: 'ChapterCollection',
+      targetQualifier: 'Chapterid'
+  }]
+//  @UI.lineItem: [{ position: 10, label: 'Book ID' }]
+//  @UI.identification: [{ position: 10, label: 'Book ID', qualifier: 'Chapterid' }]
+  @UI.hidden: true
+  BookId;
+//  @UI.lineItem: [{ position: 20, label: 'Chapter ID' }]
+//  @UI.identification: [{ position: 20, label: 'Chapter ID', qualifier: 'Chapterid'  }]
+  @UI.hidden: true
+  ChapterId;
+  @UI.lineItem: [{ position: 30, label: 'Chapter' }]
+  @UI.identification: [{ position: 30, label: 'Chapter'  }]
+  @Search.defaultSearchElement: true
+  @Search.fuzzinessThreshold: 0.8
+  @UI.selectionField: [{ position: 10 }]
+  @UI.fieldGroup: [{
+    qualifier: 'Header',
+    position: 10,
+    type: #STANDARD,
+    label: 'Chapter' }]
+  Title;
+  @UI.lineItem: [{ position: 40, label: 'Pages' }]
+  @UI.identification: [{ position: 40, label: 'Pages'  }]
+  PageCount;
+  @UI.lineItem: [{ position: 50, label: 'Content Summary' }]
+  @UI.identification: [{ position: 50, label: 'Content Summary'  }]
+  ContentSummary;
+
+  /* Hidden */
+  @UI.hidden: true
+  CreatedBy;
+  @UI.hidden: true
+  CreatedAt;
+  @UI.hidden: true
+  LocalChangedBy;
+  @UI.hidden: true
+  LocalChangedAt;
+  @UI.hidden: true
+  LastChangedAt;
+
+  //    /* Associations */
+  //    _Book;
+
+}

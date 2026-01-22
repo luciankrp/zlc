@@ -1,0 +1,88 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: {
+    typeName: 'Project',
+    typeNamePlural: 'Projects',
+    title: {
+        type: #STANDARD,
+        label: 'Project',
+        value: 'ProjectId'
+    },
+    description: {
+        type: #STANDARD,
+        label: 'List of all projects',
+        value: 'ProjectId'
+    }
+}
+annotate entity ZC_LC_PROJECT with
+{
+  @UI.facet: [{
+        id: 'Project',
+        purpose: #STANDARD,
+        position: 10,
+        label: 'Project',
+        type: #IDENTIFICATION_REFERENCE
+    }, {
+        id: 'Task',
+        purpose: #STANDARD,
+        position: 20,
+        label: 'Task',
+        type: #LINEITEM_REFERENCE,
+        targetElement: '_Task'
+    }]
+    
+  @UI.lineItem: [{ position: 10, label: 'Customer ID' }]
+  @UI.identification: [{ position: 10, label: 'Customer ID' }]
+  CustomerId;
+  @UI.lineItem: [{ position: 20, label: 'Project ID' }]
+  @UI.identification: [{ position: 20, label: 'Project ID' }]
+  ProjectId;
+  @UI.lineItem: [{ position: 30, label: 'Title' }]
+  @UI.identification: [{ position: 30, label: 'Title' }]
+  Title;
+  @UI.lineItem: [{ position: 40, label: 'Description' }]
+  @UI.identification: [{ position: 40, label: 'Description' }]
+  Description;
+  @UI.lineItem: [{ position: 50, label: 'Begin Date' }]
+  @UI.identification: [{ position: 50, label: 'Begin Date' }]
+  BeginDate;
+  @UI.lineItem: [{ position: 60, label: 'End Date' }]
+  @UI.identification: [{ position: 60, label: 'End Date' }]
+  EndDate;
+  @UI.lineItem: [{ position: 70, label: 'Status' }]
+  @UI.identification: [{ position: 70, label: 'Status' }]
+  Status;
+  @UI.lineItem: [{ position: 80, label: 'Priority' }]
+  @UI.identification: [{ position: 80, label: 'Priority' }]
+  Priority;
+  @UI.lineItem: [{ position: 90, label: 'Budget' }]
+  @UI.identification: [{ position: 90, label: 'Budget' }]
+  Budget;
+  @UI.lineItem: [{ position: 100, label: 'Currency' }]
+  @UI.identification: [{ position: 100, label: 'Currency' }]
+  CurrencyCode;
+  @UI.lineItem: [{ position: 110, label: 'Estimated Hours' }]
+  @UI.identification: [{ position: 110, label: 'Estimated Hours' }]
+  EstimatedHours;
+  @UI.lineItem: [{ position: 120, label: 'Actual Hours' }]
+  @UI.identification: [{ position: 120, label: 'Actual Hours' }]
+  ActualHours;
+
+  /* Hidden */
+  @UI.hidden: true
+  Createdby;
+  @UI.hidden: true
+  Createdat;
+  @UI.hidden: true
+  Localchangedby;
+  @UI.hidden: true
+  Localchangedat;
+  @UI.hidden: true
+  Lastchangedat;
+  
+  /* Associations */
+  @UI.hidden: true
+  _Customer;
+  @UI.hidden: true
+  _Task;
+
+}

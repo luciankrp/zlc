@@ -1,0 +1,90 @@
+managed with additional save implementation in class ZBP_I_EMPLOYEETABLE_S unique;
+strict;
+with draft;
+define behavior for ZI_EmployeeTable_S alias EmployeeTableAll
+draft table ZBC_EMPLC_D_S
+with unmanaged save
+lock master total etag LastChangedAtMax
+authorization master( global )
+{
+  field ( readonly )
+   SingletonID;
+
+  field ( features : instance )
+   TransportRequestID;
+
+  field ( notrigger )
+   SingletonID,
+   LastChangedAtMax;
+
+
+  update;
+  internal create;
+  internal delete;
+
+  draft action ( features : instance ) Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  action ( features : instance ) SelectCustomizingTransptReq parameter D_SelectCustomizingTransptReqP result [1] $self;
+
+  association _EmployeeTable { create ( features : instance ); with draft; }
+
+  validation ValidateTransportRequest on save ##NOT_ASSIGNED_TO_DETACT { create; update; }
+
+  side effects
+  {
+    action SelectCustomizingTransptReq affects
+        $self;
+  }
+
+}
+
+define behavior for ZI_EmployeeTable alias EmployeeTable ##UNMAPPED_FIELD
+persistent table ZBC_EMPLOYEE_LC
+draft table ZBC_EMPLOYEE__D
+etag master LocalLastChangedAt
+lock dependent by _EmployeeTableAll
+authorization dependent by _EmployeeTableAll
+{
+  field ( mandatory : create )
+   EmployeeId;
+
+  field ( readonly )
+   SingletonID,
+   LocalLastChangedAt,
+   LastChangedAt;
+
+  field ( readonly : update )
+   EmployeeId;
+
+  field ( notrigger )
+   SingletonID,
+   LocalLastChangedAt,
+   LastChangedAt;
+
+
+  update( features : global );
+  delete( features : global );
+
+  factory action ( features : instance ) Copy parameter ZD_CopyEmployeeTableP [1];
+
+  mapping for ZBC_EMPLOYEE_LC
+  {
+    EmployeeId = EMPLOYEE_ID;
+    FirstName = FIRST_NAME;
+    LastName = LAST_NAME;
+    Department = DEPARTMENT;
+    JoiningDate = JOINING_DATE;
+    IsActive = IS_ACTIVE;
+    ChangedBy = CHANGED_BY;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+    LastChangedAt = LAST_CHANGED_AT;
+  }
+
+  association _EmployeeTableAll { with draft; }
+
+  validation ValidateTransportRequest on save ##NOT_ASSIGNED_TO_DETACT { create; update; delete; }
+
+}

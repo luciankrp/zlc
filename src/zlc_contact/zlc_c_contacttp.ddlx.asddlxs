@@ -1,0 +1,143 @@
+@Metadata.layer: #CUSTOMER
+@UI.headerInfo: {
+    typeName: 'Contact',
+    typeNamePlural: 'Contacts',
+    title: {
+        type: #STANDARD,
+        value: 'FullName'
+
+    },
+    description: {
+        type: #STANDARD,
+        value: 'ContactTypeInt'
+    }
+}
+annotate entity ZLC_C_CONTACTTP with
+{
+  @UI.facet: [
+    {
+      id: 'idUserInfo',
+      purpose: #HEADER,
+      position: 10,
+      label: 'User details',
+      type: #FIELDGROUP_REFERENCE,
+      targetQualifier: 'HEAD_USER'
+    },
+    {
+      id: 'idGeneral',
+      position: 10,
+      label: 'General',
+      type: #IDENTIFICATION_REFERENCE,
+      targetQualifier: 'GENERAL'
+    },
+    {
+      id: 'idCollection',
+      position: 20,
+      label: 'Details',
+      type: #COLLECTION
+    },
+    {
+      id: 'idPerson',
+      parentId: 'idCollection',
+      position: 10,
+      label: 'Person',
+      type: #FIELDGROUP_REFERENCE,
+      targetQualifier: 'PERSON'
+    },
+    {
+      id: 'idAddress',
+      parentId: 'idCollection',
+      position: 20,
+      label: 'Address',
+      type: #FIELDGROUP_REFERENCE,
+      targetQualifier: 'ADDRESS'
+    },
+    {
+      id: 'idDigitalContact',
+      position: 30,
+      label: 'Contact',
+      type: #FIELDGROUP_REFERENCE,
+      targetQualifier: 'CONTACT',
+      hidden: #( isHiddenContactFacet )
+    }
+  ]
+  @UI.selectionField: [{ position: 10 }]
+  @UI.lineItem: [{ position: 10 },
+   { type: #FOR_ACTION, dataAction: 'createAddress', label: 'Create Address' },
+   { type: #FOR_ACTION, dataAction: 'createCustomer', label: 'Create Customer' },
+   { type: #FOR_ACTION, dataAction: 'createEmployee', label: 'Create Employee' }
+  ]
+  @UI.identification: [{ position: 10, qualifier: 'GENERAL' }]
+  ContactId;
+
+  @UI.selectionField: [{ position: 20 }]
+  @UI.lineItem: [{ position: 20 }]
+  @UI.identification: [{ position: 20, qualifier: 'GENERAL' }]
+  ContactTypeInt;
+
+  @UI.lineItem: [{ position: 30 }]
+  @UI.fieldGroup: [{ position: 10, qualifier: 'PERSON' }]
+  FirstName;
+
+  @UI.lineItem: [{ position: 40 }]
+  @UI.fieldGroup: [{ position: 20, qualifier: 'PERSON' }]
+  LastName;
+
+  @UI.fieldGroup: [{ position: 30, qualifier: 'PERSON' }]
+  @UI.hidden: #( isHiddenBirthday )
+  Birthday;
+
+  @UI.fieldGroup: [{ position: 10, qualifier: 'ADDRESS' }]
+  Street;
+
+  @UI.fieldGroup: [{ position: 20, qualifier: 'ADDRESS' }]
+  HouseNumber;
+
+  @UI.lineItem: [{ position: 50 }]
+  @UI.fieldGroup: [{ position: 30, qualifier: 'ADDRESS' }]
+  Town;
+
+  @UI.fieldGroup: [{ position: 40, qualifier: 'ADDRESS' }]
+  ZipCode;
+
+  @UI.selectionField: [{ position: 30 }]
+  @UI.lineItem: [{ position: 60 }]
+  @UI.fieldGroup: [{ position: 50, qualifier: 'ADDRESS' }]
+  Country;
+
+  @UI.fieldGroup: [{ position: 10, qualifier: 'CONTACT' }]
+  @UI.hidden: #( isHiddenTelephone )
+  Telephone;
+
+  @UI.fieldGroup: [{ position: 20, qualifier: 'CONTACT' }]
+  @UI.hidden: #( isHiddenEmail )
+  Email;
+
+  @UI.fieldGroup: [{ position: 10, qualifier: 'HEAD_USER' }]
+  LocalCreatedBy;
+  @UI.hidden: true
+
+  LocalCreatedAt;
+
+  @UI.fieldGroup: [{ position: 20, qualifier: 'HEAD_USER' }]
+  LocalLastChangedBy;
+
+  @UI.hidden: true
+  LocalLastChangedAt;
+
+  @UI.hidden: true
+  LastChangedAt;
+
+  @UI.hidden: true
+  isHiddenBirthday;
+
+  @UI.hidden: true
+  isHiddenContactFacet;
+
+  @UI.hidden: true
+  isHiddenEmail;
+
+  @UI.hidden: true
+  isHiddenTelephone;
+
+}

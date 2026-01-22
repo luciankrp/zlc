@@ -1,0 +1,220 @@
+@Metadata.layer: #CORE
+@UI.headerInfo.title.type: #STANDARD
+@UI.headerInfo.title.value: 'UUID'
+@UI.headerInfo.description.type: #STANDARD
+@UI.headerInfo.description.value: 'UUID'
+annotate view ZLC_C_SASALE with
+{
+  @EndUserText.label: 'UUID'
+  @UI.facet: [ {
+    label: 'General Information', 
+    id: 'GeneralInfo', 
+    purpose: #STANDARD, 
+    position: 10 , 
+    type: #IDENTIFICATION_REFERENCE
+  }, 
+  {
+    label: 'SAINFO Items', 
+    id: 'SAINFOItems', 
+    purpose: #STANDARD, 
+    position: 11 , 
+    type: #LINEITEM_REFERENCE, 
+    targetElement: '_SAINFO'
+  }, 
+  {
+    label: 'SASOLD Items', 
+    id: 'SASOLDItems', 
+    purpose: #STANDARD, 
+    position: 12 , 
+    type: #LINEITEM_REFERENCE, 
+    targetElement: '_SASOLD'
+  }, 
+  {
+    label: 'SASELLER Items', 
+    id: 'SASELLERItems', 
+    purpose: #STANDARD, 
+    position: 13 , 
+    type: #LINEITEM_REFERENCE, 
+    targetElement: '_SASELLER'
+  } ]
+  @UI.identification: [ {
+    position: 10 , 
+    label: 'UUID'
+  } ]
+  @UI.lineItem: [ {
+    position: 10 , 
+    label: 'UUID'
+  } ]
+  @UI.selectionField: [ {
+    position: 10 
+  } ]
+  UUID;
+  
+  @UI.identification: [ {
+    position: 20 
+  } ]
+  @UI.lineItem: [ {
+    position: 20 
+  } ]
+  @UI.selectionField: [ {
+    position: 20 
+  } ]
+  Partnernumber;
+  
+  @UI.identification: [ {
+    position: 30 
+  } ]
+  @UI.lineItem: [ {
+    position: 30 
+  } ]
+  @UI.selectionField: [ {
+    position: 30 
+  } ]
+  Salesdate;
+  
+  @UI.identification: [ {
+    position: 40 
+  } ]
+  @UI.lineItem: [ {
+    position: 40 
+  } ]
+  @UI.selectionField: [ {
+    position: 40 
+  } ]
+  Salesvolume;
+  
+  @UI.identification: [ {
+    position: 50 
+  } ]
+  @UI.lineItem: [ {
+    position: 50 
+  } ]
+  @UI.selectionField: [ {
+    position: 50 
+  } ]
+  Salescurrency;
+  
+  @UI.identification: [ {
+    position: 60 
+  } ]
+  @UI.lineItem: [ {
+    position: 60 
+  } ]
+  @UI.selectionField: [ {
+    position: 60 
+  } ]
+  Differenceamount;
+  
+  @UI.identification: [ {
+    position: 70 
+  } ]
+  @UI.lineItem: [ {
+    position: 70 
+  } ]
+  @UI.selectionField: [ {
+    position: 70 
+  } ]
+  Differencecurrency;
+  
+  @UI.identification: [ {
+    position: 80 
+  } ]
+  @UI.lineItem: [ {
+    position: 80 
+  } ]
+  @UI.selectionField: [ {
+    position: 80 
+  } ]
+  Differencequantity;
+  
+  @UI.identification: [ {
+    position: 90 
+  } ]
+  @UI.lineItem: [ {
+    position: 90 
+  } ]
+  @UI.selectionField: [ {
+    position: 90 
+  } ]
+  Differenceunit;
+  
+  @UI.identification: [ {
+    position: 100 
+  } ]
+  @UI.lineItem: [ {
+    position: 100 
+  } ]
+  @UI.selectionField: [ {
+    position: 100 
+  } ]
+  Salecomment;
+  
+  @UI.identification: [ {
+    position: 110 
+  } ]
+  @UI.lineItem: [ {
+    position: 110 
+  } ]
+  @UI.selectionField: [ {
+    position: 110 
+  } ]
+  LocalCreatedBy;
+  
+  @UI.identification: [ {
+    position: 120 
+  } ]
+  @UI.lineItem: [ {
+    position: 120 
+  } ]
+  @UI.selectionField: [ {
+    position: 120 
+  } ]
+  LocalCreatedAt;
+  
+  @UI.identification: [ {
+    position: 130 
+  } ]
+  @UI.lineItem: [ {
+    position: 130 
+  } ]
+  @UI.selectionField: [ {
+    position: 130 
+  } ]
+  LocalLastChangedBy;
+  
+  @UI.identification: [ {
+    position: 140 
+  } ]
+  @UI.lineItem: [ {
+    position: 140 
+  } ]
+  @UI.selectionField: [ {
+    position: 140 
+  } ]
+  LocalLastChangedAt;
+  
+  @UI.identification: [ {
+    position: 150 
+  } ]
+  @UI.lineItem: [ {
+    position: 150 
+  } ]
+  @UI.selectionField: [ {
+    position: 150 
+  } ]
+  LastChangedAt;
+  
+  @EndUserText.label: '_BaseEntity'
+  @UI.identification: [ {
+    position: 190 , 
+    label: '_BaseEntity'
+  } ]
+  @UI.lineItem: [ {
+    position: 190 , 
+    label: '_BaseEntity'
+  } ]
+  @UI.selectionField: [ {
+    position: 190 
+  } ]
+  _BaseEntity;
+}

@@ -1,0 +1,22 @@
+projection;
+strict ( 2 );
+use draft;
+define behavior for ZC_EMP_SINGLETON_LC //alias <alias_name>
+{
+
+  use association _Employee { create; with draft; }
+
+  use action Activate;
+  use action Discard;
+  use action Edit;
+  use action Prepare;
+  use action Resume;
+}
+
+define behavior for ZC_EMPLOYEE_LC //alias <alias_name>
+{
+  use update;
+  use delete;
+
+  use association _EmployeeSingletone { with draft; }
+}

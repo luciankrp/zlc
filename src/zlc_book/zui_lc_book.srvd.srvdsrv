@@ -1,0 +1,5 @@
+@EndUserText.label: 'Book Service Definition'
+define service ZUI_LC_BOOK {
+  expose ZC_LC_BOOK    as Book;
+  expose ZC_LC_CHAPTER as Chapter;
+}

@@ -1,0 +1,39 @@
+managed implementation in class zcl_i_so unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZI_SO //alias <alias_name>
+persistent table zlc_so
+draft table zlc_so_d
+lock master
+total etag LastChangedAt
+authorization master ( instance )
+//etag master <field_name>
+{
+  create ( authorization : global );
+  update;
+  delete;
+
+  //  field ( readonly ) SalesOrder;
+
+  draft action Resume;
+  draft action Edit;
+  draft determine action Prepare;
+  draft action Activate optimized;
+  draft action Discard;
+
+  mapping for zlc_so
+    {
+      SalesOrder         = vbeln;
+      EntryDate          = erdat;
+      EntryTime          = erzet;
+      UserName           = ernam;
+      DocType            = auart;
+      NetValue           = netwr;
+      Currency           = waerk;
+      CountryCode        = country_code;
+      LocalLastChangedAt = local_last_change_at;
+      LastChangedAt      = last_change_at;
+    }
+
+}

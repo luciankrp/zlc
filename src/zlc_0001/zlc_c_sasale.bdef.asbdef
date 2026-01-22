@@ -1,0 +1,57 @@
+projection implementation in class ZLC_BP_C_SASALE unique;
+strict ( 2 );
+extensible;
+use draft;
+use side effects;
+define behavior for ZLC_C_SASALE alias SASALE
+extensible
+use etag
+{
+  use create;
+  use update;
+  use delete;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+  use association _SAINFO { create; with draft; }
+  use association _SASOLD { create; with draft; }
+  use association _SASELLER { create; with draft; }
+
+}
+
+define behavior for ZLC_C_SAINFO alias SAINFO
+extensible
+use etag
+{
+  use update;
+  use delete;
+
+  use association _SASALE { with draft; }
+
+}
+
+define behavior for ZLC_C_SASOLD alias SASOLD
+extensible
+use etag
+{
+  use update;
+  use delete;
+
+  use association _SASALE { with draft; }
+
+}
+
+define behavior for ZLC_C_SASELLER alias SASELLER
+extensible
+use etag
+{
+  use update;
+  use delete;
+
+  use association _SASALE { with draft; }
+
+}

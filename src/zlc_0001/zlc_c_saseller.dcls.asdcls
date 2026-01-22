@@ -1,0 +1,6 @@
+@EndUserText.label: 'ZLC_C_SASELLER'
+@MappingRole: true
+define role ZLC_C_SASELLER {
+  grant select on ZLC_C_SASELLER
+  where INHERITING CONDITIONS FROM ENTITY ZLC_R_SASELLER REPLACING { ROOT WITH _BaseEntity };
+}

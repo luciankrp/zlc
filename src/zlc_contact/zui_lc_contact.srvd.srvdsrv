@@ -1,0 +1,8 @@
+@EndUserText.label: 'Contact Service Definition'
+@ObjectModel.leadingEntity.name: 'ZLC_C_CONTACTTP'
+define service ZUI_LC_CONTACT {
+  expose ZLC_C_CONTACTTP     as Contact;
+  expose ZLC_I_CONTACTVH;
+  expose ZLC_I_ContactTypeVH;
+  expose I_CountryVH;
+}

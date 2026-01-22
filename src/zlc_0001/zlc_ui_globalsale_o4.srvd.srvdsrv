@@ -1,0 +1,14 @@
+@EndUserText: {
+  label: 'Service Definition for ZLC_C_SASALE'
+}
+@ObjectModel: {
+  leadingEntity: {
+    name: 'ZLC_C_SASALE'
+  }
+}
+define service ZLC_UI_GLOBALSALE_O4 provider contracts odata_v4_ui {
+  expose ZLC_C_SASALE as SASALE;
+  expose ZLC_C_SAINFO as SAINFO;
+  expose ZLC_C_SASOLD as SASOLD;
+  expose ZLC_C_SASELLER as SASELLER;
+}

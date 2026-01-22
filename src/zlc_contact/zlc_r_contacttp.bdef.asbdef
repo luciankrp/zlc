@@ -1,0 +1,62 @@
+managed implementation in class zbp_lc_contact unique;
+strict ( 2 );
+with draft;
+auxiliary class zcl_lc_contact_behavior;
+
+define behavior for ZLC_R_ContactTP alias Contact
+persistent table zlc_contact
+draft table zlc_contactd
+lock master total etag LastChangedAt
+authorization master ( instance )
+etag master LocalLastChangedAt
+late numbering
+{
+  //  internal create; // or deactivate from projection
+  create ( authorization : global ); // we can still can trigger via EML
+  update;
+  delete;
+  field ( readonly ) ContactId;
+  field ( mandatory ) Email, Telephone;
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare
+  {
+    validation checkNameIsFilled;
+    validation checkMailForEmployee;
+    validation checkContactForCustomer;
+  }
+
+  static factory action ( authorization : global ) createAddress [1];
+  static factory action ( authorization : global ) createCustomer [1];
+  static factory action ( authorization : global ) createEmployee [1];
+
+  validation checkNameIsFilled on save { create; update; }
+  validation checkMailForEmployee on save { create; update; }
+  validation checkContactForCustomer on save { create; update; }
+
+  determination fillAddressInformation on modify { create; update; }
+
+  mapping for zlc_contact
+    {
+      ContactId          = contact_id;
+      ContactTypeInt     = contact_type;
+      FirstName          = first_name;
+      LastName           = last_name;
+      Birthday           = birthday;
+      Street             = street;
+      HouseNumber        = house_number;
+      Town               = town;
+      ZipCode            = zip_code;
+      Country            = country;
+      Telephone          = telephone;
+      Email              = email;
+      LocalCreatedBy     = local_created_by;
+      LocalCreatedAt     = local_created_at;
+      LocalLastChangedBy = local_last_changed_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt      = last_changed_at;
+    }
+}

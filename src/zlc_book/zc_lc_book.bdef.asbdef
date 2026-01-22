@@ -1,0 +1,29 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZC_LC_BOOK alias Book
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _Chapter { create; with draft; }
+
+  use action approve;
+  use action reject;
+
+  use action Activate;
+  use action Discard;
+  use action Edit;
+  use action Prepare;
+  use action Resume;
+}
+
+define behavior for ZC_LC_CHAPTER alias Chapter
+{
+  use update;
+  use delete;
+
+  use association _Book { with draft; }
+}

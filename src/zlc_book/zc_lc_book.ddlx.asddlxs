@@ -1,0 +1,119 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: {
+    typeName: 'Book',
+    typeNamePlural: 'Books',
+//    typeImageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyBoXWcTShJxcro9xkSz6eMkhCoKbPtHy_VQ&s',
+    imageUrl: 'Logo',
+    title: {
+        type: #STANDARD,
+        label: 'Book',
+        value: 'BookId'
+    },
+    description: {
+        type: #STANDARD,
+        label: 'Book',
+        value: 'BookId'
+    }
+}
+@Search.searchable: true
+@UI.presentationVariant: [{ sortOrder: [{ by: 'Title', direction: #ASC }] }]
+annotate entity ZC_LC_BOOK with
+{
+  @UI.facet: [{
+      id: 'Header',
+      purpose: #HEADER,
+      importance: #HIGH,
+      label: 'Header',
+      type: #FIELDGROUP_REFERENCE,
+      targetQualifier: 'Header'
+  }, {
+      id: 'BookCollection',
+      purpose: #STANDARD,
+      label: 'Book',
+      type: #COLLECTION,
+      position: 10
+  }, {
+      id: 'Book',
+      purpose: #STANDARD,
+      position: 10 ,
+  //      importance: #HIGH,
+      label: 'Book',
+      type: #IDENTIFICATION_REFERENCE,
+      parentId: 'BookCollection'
+  }, {
+      id: 'BookId',
+      purpose: #STANDARD,
+      position: 20 ,
+  //      importance: #HIGH,
+      label: 'Book ID',
+      type: #IDENTIFICATION_REFERENCE,
+      parentId: 'BookCollection',
+      targetQualifier: 'BookId'
+  }, {
+      id: 'Chapter',
+      purpose: #STANDARD,
+      position: 20 ,
+  //      importance: #HIGH,
+      label: 'Chapters',
+      type: #LINEITEM_REFERENCE,
+      targetElement: '_Chapter'
+  }]
+//  @UI.lineItem: [{ position: 10 }]
+//  @UI.identification: [{ position: 10, label: 'Book ID', qualifier: 'BookId' }]
+  //  @UI.fieldGroup: [{
+  //      qualifier: 'BookId',
+  //      position: 10,
+  //      label: 'Book ID',
+  //      iconUrl: ''
+  //  }]
+  @UI.hidden: true
+  BookId;
+  @UI.lineItem: [{ position: 15, label: 'Logo' }]
+  @UI.identification: [{ position: 15, label: 'Logo' }]
+  Logo;
+  @UI.lineItem: [{ position: 20 }]
+  @UI.identification: [{ position: 20, label: 'Title' }]
+  @Search.defaultSearchElement: true
+  @UI.selectionField: [{ position: 10 }]
+  @UI.fieldGroup: [{
+      qualifier: 'Header',
+      position: 10,
+      label: 'Title',
+      iconUrl: ''
+  }]
+  Title;
+  @UI.lineItem: [{ position: 30 }]
+  @UI.identification: [{ position: 30, label: 'Author' }]
+  Author;
+  //  @UI.lineItem: [{ position: 40 }]
+  @UI.identification: [{ position: 40, label: 'Genre' }]
+  @UI.selectionField: [{ position: 20 }]
+  @Consumption.valueHelpDefinition: [{
+      entity: { name: 'ZI_BOOK_GENRE_VH',
+                element: 'Genre' } }]
+  Genre;
+  //  @UI.lineItem: [{ position: 50, label: 'Publish Year' }]
+  @UI.identification: [{ position: 50, label: 'Publish Year' }]
+  PublishYear;
+  @UI.lineItem: [{ position: 60, label: 'Status' },
+   { type: #FOR_ACTION, dataAction: 'approve', label: 'Approve' },
+   { type: #FOR_ACTION, dataAction: 'reject', label: 'Reject' }
+   ]
+  StatusIcon;
+
+  /* Hidden */
+  @UI.hidden: true
+  CreatedBy;
+  @UI.hidden: true
+  CreatedAt;
+  @UI.hidden: true
+  LocalChangedBy;
+  @UI.hidden: true
+  LocalChangedAt;
+  @UI.hidden: true
+  LastChangedAt;
+
+  //  /* Associations */
+  //  _Chapter;
+
+}

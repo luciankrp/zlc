@@ -1,0 +1,63 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: {
+    typeName: 'Task',
+    typeNamePlural: 'Tasks',
+    title: {
+        type: #STANDARD,
+        label: 'Task',
+        value: 'TaskId'
+    },
+    description: {
+        type: #STANDARD,
+        label: 'List of all tasks',
+        value: 'TaskId'
+    }
+}
+annotate entity ZC_LC_TASK with
+{
+  @UI.facet: [{
+        id: 'Task',
+        purpose: #STANDARD,
+        position: 10,
+        label: 'Task',
+        type: #IDENTIFICATION_REFERENCE
+    }]
+    
+  @UI.identification: [{ position: 10, label: 'Customer ID' }]
+  CustomerId;
+  @UI.identification: [{ position: 20, label: 'Project ID' }]
+  ProjectId;
+  @UI.identification: [{ position: 30, label: 'Task ID' }]
+  TaskId;
+  @UI.identification: [{ position: 40, label: 'Description' }]
+  Description;
+  @UI.identification: [{ position: 50, label: 'Assignee' }]
+  Assignee;
+  @UI.identification: [{ position: 60, label: 'Due Date' }]
+  DueDate;
+  @UI.identification: [{ position: 70, label: 'Status' }]
+  Status;
+  @UI.identification: [{ position: 80, label: 'Estimated Hours' }]
+  EstimatedHours;
+  @UI.identification: [{ position: 90, label: 'Actual Hours' }]
+  ActualHours;
+
+  /* Hidden */
+  @UI.hidden: true
+  Createdby;
+  @UI.hidden: true
+  Createdat;
+  @UI.hidden: true
+  Localchangedby;
+  @UI.hidden: true
+  Localchangedat;
+  @UI.hidden: true
+  Lastchangedat;
+
+  /* Associations */
+  @UI.hidden: true
+  _Customer;
+  @UI.hidden: true
+  _Project;
+
+}

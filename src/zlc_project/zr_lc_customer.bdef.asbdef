@@ -1,0 +1,98 @@
+unmanaged implementation in class zbp_i_lc_customer unique;
+strict ( 2 );
+
+define behavior for ZR_LC_CUSTOMER alias Customer
+implementation in class zbp_r_lc_customer unique
+late numbering
+lock master
+authorization master ( instance )
+etag master Localchangedat
+{
+  create ( authorization : global );
+  update;
+  delete;
+  field ( readonly ) CustomerId;
+  field ( mandatory ) Name, City, Country;
+  association _Project { create ( features : instance ); }
+
+  mapping for zlc_customer control zlc_s_customer_intx
+    {
+      CustomerId     = customer_id;
+      Name           = name;
+      City           = city;
+      Country        = country;
+      Createdby      = createdby;
+      Createdat      = createdat;
+      Localchangedby = localchangedby;
+      Localchangedat = localchangedat;
+      Lastchangedat  = lastchangedat;
+    }
+}
+
+define behavior for ZR_LC_PROJECT alias Project
+implementation in class zbp_r_lc_project unique
+late numbering
+lock dependent by _Customer
+authorization dependent by _Customer
+etag master Localchangedat
+{
+  update;
+  delete;
+  field ( readonly ) CustomerId, ProjectId;
+  field ( mandatory ) Title, BeginDate, EndDate, Budget, CurrencyCode, EstimatedHours;
+  association _Customer;
+  association _Task { create; }
+
+  mapping for zlc_project control zlc_s_project_intx
+    {
+      CustomerId     = customer_id;
+      ProjectId      = project_id;
+      Title          = title;
+      Description    = description;
+      BeginDate      = begin_date;
+      EndDate        = end_date;
+      Status         = status;
+      Priority       = priority;
+      Budget         = budget;
+      CurrencyCode   = currency_code;
+      EstimatedHours = estimated_hours;
+      ActualHours    = actual_hours;
+      Createdby      = createdby;
+      Localchangedby = localchangedby;
+      Localchangedat = localchangedat;
+      Lastchangedat  = lastchangedat;
+    }
+}
+
+define behavior for ZR_LC_TASK alias Task
+implementation in class zbp_r_lc_task unique
+late numbering
+lock dependent by _Customer
+authorization dependent by _Customer
+etag master Localchangedat
+{
+  update;
+  delete;
+  field ( readonly ) CustomerId, ProjectId, TaskId;
+  field ( mandatory ) Description, Assignee, DueDate, EstimatedHours;
+  association _Customer;
+  association _Project;
+
+  mapping for zlc_task control zlc_s_task_intx
+    {
+      CustomerId     = customer_id;
+      ProjectId      = project_id;
+      TaskId         = task_id;
+      Description    = description;
+      Assignee       = assignee;
+      DueDate        = due_date;
+      Status         = status;
+      EstimatedHours = estimated_hours;
+      ActualHours    = actual_hours;
+      Createdby      = createdby;
+      Createdat      = createdat;
+      Localchangedby = localchangedby;
+      Localchangedat = localchangedat;
+      Lastchangedat  = lastchangedat;
+    }
+}

@@ -1,0 +1,29 @@
+projection;
+strict ( 2 );
+
+define behavior for ZC_LC_CUSTOMER alias Customer
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _Project { create; }
+}
+
+define behavior for ZC_LC_PROJECT alias Project
+{
+  use update;
+  use delete;
+
+  use association _Customer;
+  use association _Task { create; }
+}
+
+define behavior for ZC_LC_TASK alias Task
+{
+  use update;
+  use delete;
+
+  use association _Customer;
+  use association _Project;
+}

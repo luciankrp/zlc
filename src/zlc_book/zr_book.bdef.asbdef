@@ -1,0 +1,73 @@
+managed; // implementation in class zbp_r_book unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZR_BOOK alias Book
+implementation in class zbp_r_book unique
+persistent table zlc_book
+draft table zlc_book_d
+lock master
+total etag LastChangedAt
+authorization master ( instance )
+etag master LocalChangedAt
+{
+  create ( authorization : global );
+  update;
+  delete;
+  field ( numbering : managed, readonly ) BookId;
+  association _Chapter { create; with draft; }
+
+  action approve result [1] $self;
+  action reject result [1] $self;
+
+  draft action Activate optimized;
+  draft action Edit;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for zlc_book
+    {
+      BookId         = book_id;
+      Title          = title;
+      Author         = author;
+      Genre          = genre;
+      PublishYear    = publish_year;
+      Logo           = logo;
+      StatusIcon     = status_icon;
+      CreatedBy      = created_by;
+      CreatedAt      = creted_at;
+      LocalChangedBy = local_changed_by;
+      LocalChangedAt = local_changed_at;
+      LastChangedAt  = last_changed_at;
+    }
+
+}
+
+define behavior for ZR_CHAPTER alias Chapter
+persistent table zlc_chapter
+draft table zlc_chapter_d
+lock dependent by _Book
+authorization dependent by _Book
+etag master LastChangedAt
+{
+  update;
+  delete;
+  field ( readonly ) BookId;
+  field ( numbering : managed, readonly ) ChapterId;
+  association _Book { with draft; }
+
+  mapping for zlc_chapter
+    {
+      BookId         = book_id;
+      ChapterId      = chapter_id;
+      Title          = title;
+      PageCount      = page_count;
+      ContentSummary = content_summary;
+      CreatedBy      = created_by;
+      CreatedAt      = creted_at;
+      LocalChangedBy = local_changed_by;
+      LocalChangedAt = local_changed_at;
+      LastChangedAt  = last_changed_at;
+    }
+}

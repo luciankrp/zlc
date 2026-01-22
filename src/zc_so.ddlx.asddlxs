@@ -1,0 +1,50 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: {
+    typeName: 'Sales Order',
+    typeNamePlural: 'Sales Orders',
+    title: {
+        type: #STANDARD,
+        label: 'Sales Order',
+        value: 'SalesOrder' }
+}
+annotate entity ZC_SO with
+{
+
+  @UI.lineItem: [{ position: 10, label: 'Sales Order' }]
+  @UI.facet: [{  id: 'SalesOrder', purpose: #STANDARD, position: 10, label: 'Sales Order', type: #IDENTIFICATION_REFERENCE }]
+  @UI.identification: [{ position: 10, label: 'Sales Order' }]
+  @UI.selectionField: [{ position: 10 }]
+  @EndUserText.label: 'Sales Order'
+  //  @Consumption.valueHelpDefinition: [{ entity: {
+  //      name: 'ZI_SO',
+  //      element: 'SalesOrder'
+  //  }  }]
+  SalesOrder;
+  @UI.lineItem: [{ position: 20, label: 'Date' }]
+  @UI.identification: [{ position: 20, label: 'Date' }]
+  EntryDate;
+  @UI.lineItem: [{ position: 30, label: 'Time' }]
+  @UI.identification: [{ position: 30, label: 'Time' }]
+  EntryTime;
+  @UI.lineItem: [{ position: 40, label: 'Name' }]
+  @UI.identification: [{ position: 40, label: 'Name' }]
+  UserName;
+  @UI.lineItem: [{ position: 50, label: 'Doc Type' }]
+  @UI.identification: [{ position: 50, label: 'Doc Type' }]
+  DocType;
+  @UI.lineItem: [{ position: 60, label: 'Net Value' }]
+  @UI.identification: [{ position: 60, label: 'Net Value' }]
+  NetValue;
+  //  @UI.lineItem: [{ label: 'Currency' }]
+  @UI.identification: [{ position: 70, label: 'Currency' }]
+  //  @UI.hidden: true
+  Currency;
+  @UI.lineItem: [{ position: 80, label: 'Country' }]
+  @Consumption.valueHelpDefinition: [{ entity: {
+      name: 'I_CountryVH',
+      element: 'Country'
+  } }]
+  @UI.identification: [{ position: 80, label: 'Country' }]
+  CountryCode;
+
+}

@@ -1,0 +1,150 @@
+managed implementation in class ZLC_BP_R_SASALE unique;
+strict ( 2 );
+with draft;
+extensible;
+define behavior for ZLC_R_SASALE alias SASALE
+persistent table zlc_sasale
+extensible
+draft table zlc_sasale_d
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+authorization master ( global )
+{
+  field ( readonly )
+  UUID,
+  LocalCreatedBy,
+  LocalCreatedAt,
+  LocalLastChangedBy,
+  LocalLastChangedAt,
+  LastChangedAt;
+
+  field ( numbering : managed )
+  UUID;
+
+
+  create;
+  update;
+  delete;
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for zlc_sasale corresponding extensible
+    {
+      UUID               = uuid;
+      Partnernumber      = partnernumber;
+      Salesdate          = salesdate;
+      Salesvolume        = salesvolume;
+      Salescurrency      = salescurrency;
+      Differenceamount   = differenceamount;
+      Differencecurrency = differencecurrency;
+      Differencequantity = differencequantity;
+      Differenceunit     = differenceunit;
+      Salecomment        = salecomment;
+      LocalCreatedBy     = local_created_by;
+      LocalCreatedAt     = local_created_at;
+      LocalLastChangedBy = local_last_changed_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt      = last_changed_at;
+    }
+
+  association _SAINFO { create; with draft; }
+  association _SASOLD { create; with draft; }
+  association _SASELLER { create; with draft; }
+
+}
+
+define behavior for ZLC_R_SAINFO alias SAINFO
+persistent table zlc_sainfo
+extensible
+draft table zlc_sainfo_d
+etag dependent by _SASALE
+lock dependent by _SASALE
+authorization dependent by _SASALE
+{
+  field ( readonly )
+  UUID,
+  ParentUUID;
+
+  field ( numbering : managed )
+  UUID;
+
+
+  update;
+  delete;
+
+  mapping for zlc_sainfo corresponding extensible
+    {
+      UUID       = uuid;
+      ParentUUID = parent_uuid;
+      Text000    = text000;
+    }
+
+  association _SASALE { with draft; }
+
+}
+
+define behavior for ZLC_R_SASOLD alias SASOLD
+persistent table zlc_sasold
+extensible
+draft table zlc_sasold_d
+etag dependent by _SASALE
+lock dependent by _SASALE
+authorization dependent by _SASALE
+{
+  field ( readonly )
+  UUID,
+  ParentUUID;
+
+  field ( numbering : managed )
+  UUID;
+
+
+  update;
+  delete;
+
+  mapping for zlc_sasold corresponding extensible
+    {
+      UUID       = uuid;
+      ParentUUID = parent_uuid;
+      Materialid = materialid;
+    }
+
+  association _SASALE { with draft; }
+
+}
+
+define behavior for ZLC_R_SASELLER alias SASELLER
+persistent table zlc_saseller
+extensible
+draft table zlc_saseller_d
+etag dependent by _SASALE
+lock dependent by _SASALE
+authorization dependent by _SASALE
+{
+  field ( readonly )
+  UUID,
+  ParentUUID;
+
+  field ( numbering : managed )
+  UUID;
+
+
+  update;
+  delete;
+
+  mapping for zlc_saseller corresponding extensible
+    {
+      UUID       = uuid;
+      ParentUUID = parent_uuid;
+      Sellerid   = sellerid;
+      Quota      = quota;
+      Confirmed  = confirmed;
+    }
+
+  association _SASALE { with draft; }
+
+}

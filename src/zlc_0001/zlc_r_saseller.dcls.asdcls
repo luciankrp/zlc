@@ -1,0 +1,6 @@
+@EndUserText.label: 'ZLC_R_SASELLER'
+@MappingRole: true
+define role ZLC_R_SASELLER {
+  grant select on ZLC_R_SASELLER
+  where TRUE;
+}

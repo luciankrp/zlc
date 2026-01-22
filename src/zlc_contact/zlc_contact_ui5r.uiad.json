@@ -1,0 +1,35 @@
+{
+  "formatVersion": "2",
+  "header": {
+    "description": "Manage all contacts",
+    "originalLanguage": "en",
+    "abapLanguageVersion": "cloudDevelopment"
+  },
+  "generalInformation": {
+    "appType": "ui5",
+    "catalogId": "SAP_TC_UI5_REPO_UIAD",
+    "targetMappingTitle": "Contact Management"
+  },
+  "ui5AppDetails": {
+    "appId": "lc.contact.zlccontact"
+  },
+  "navigation": {
+    "targetMappingId": "UI5R_3B399DE9583D2C8DFAFF4B2D0155D008FA2ADD25_TM",
+    "semanticObject": "ZLC_CONTACT",
+    "action": "manage",
+    "desktop": true,
+    "tablet": true,
+    "phone": true
+  },
+  "tiles": [
+    {
+      "id": "UI5R_3B399DE9583D2C8DFAFF4B2D0155D008FA2ADD25_AL",
+      "tileType": "static",
+      "isDefault": true,
+      "standard": {
+        "title": "Contact Management",
+        "subtitle": "Manage all contacts"
+      }
+    }
+  ]
+}

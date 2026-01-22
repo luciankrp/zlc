@@ -1,0 +1,48 @@
+@Metadata.layer: #CORE
+@Search.searchable: true
+@UI.headerInfo: {
+    typeName: 'Supplement',
+    typeNamePlural: 'Supplements',
+    title: {
+        type: #STANDARD,
+        label: 'Booking Supplements',
+        value: 'BookingSupplementId' }
+}
+annotate entity ZC_booksuppl_lc_m with
+{
+  @UI.facet: [{ id: 'BookSuppl',
+      purpose: #STANDARD,
+      parentId: '',
+      position: 10,
+      label: 'Booking Supplements',
+      type: #IDENTIFICATION_REFERENCE }]
+  @UI: { lineItem: [{ position: 10 }], identification: [{ position: 10 }] }
+  BookingSupplementId;
+  @Search.defaultSearchElement: true
+  TravelId;
+  @Search.defaultSearchElement: true
+  BookingId;
+  @UI: { lineItem: [{ position: 20 }], identification: [{ position: 20 }] }
+  @Consumption.valueHelpDefinition: [{ entity: {
+      name: '/DMO/I_Supplement',
+      element: 'SupplementID'
+  } }]
+  SupplementId;
+  @UI: { lineItem: [{ position: 30 }], identification: [{ position: 30 }] }
+  Price;
+  //  @UI: { lineItem: [{ position: 40 }], identification: [{ position: 40 }] }
+  @Consumption.valueHelpDefinition: [{ entity: {
+          name: 'I_Currency',
+          element: 'Currency'
+      } }]
+  @UI.identification: [{ position: 40 }]
+  CurrencyCode;
+  @UI.hidden: true
+  LastChangedAt;
+  //    /* Associations */
+  //    _Booking;
+  //    _Supplement;
+  //    _SupplementText;
+  //    _Travel;
+
+}
